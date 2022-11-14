@@ -13,6 +13,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -26,6 +27,7 @@ import org.junit.jupiter.api.DisplayName;
  * DO NOT change anything here, just implement the listInterface, instantiate it in
  * listBuilder.createIntegerlist and perform the tests.
  */
+@Timeout(60)
 @DisplayName("Basic tests for the listImplementation class.")
 @TestMethodOrder(OrderAnnotation.class)
 public class ListTests {

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestMethodOrder;
-
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +20,7 @@ import java.io.IOException;
 
 //TODO: TEACHER do not give this test to students.
 
+@Timeout(1440)
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("Tests using different Book implementations")
 public class ComparisonTests {

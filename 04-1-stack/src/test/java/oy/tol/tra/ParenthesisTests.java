@@ -11,11 +11,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * Tests for checking if structured parenthesis in a string match correctly.
  * 
  */
+@Timeout(60)
 @DisplayName("Testing the stack with two structured files with parentheses.")
 public class ParenthesisTests {
 

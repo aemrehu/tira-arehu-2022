@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+@Timeout(240)
 @DisplayName("Basic tests for the Mode class.")
 public class ModeTests {
     static final int MIN_ARRAY_SIZE = 1000;

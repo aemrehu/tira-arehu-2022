@@ -10,11 +10,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * Unit test for BooksAndWords.
  */
+@Timeout(720)
+@DisplayName("Correctness tests for algorithm")
 public class CorrectnessTests 
 {
     /**

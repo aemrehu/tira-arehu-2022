@@ -11,7 +11,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
+// TEACHERS: TODO: Move this file to root dir of this project before student exposure.
+
+@Timeout(5)
 @DisplayName("Testing the Generic algorithms.")
 public class GenericTests {
    

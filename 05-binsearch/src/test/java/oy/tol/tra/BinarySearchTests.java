@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+@Timeout(360)
 @DisplayName("Compare linear and binary search speeds")
 public class BinarySearchTests {
 

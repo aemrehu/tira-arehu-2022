@@ -13,8 +13,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 
+@Timeout(60)
 @DisplayName("Testing basic functionality of the list reverse().")
 public class ReorderListTests {
 

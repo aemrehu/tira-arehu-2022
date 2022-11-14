@@ -12,8 +12,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.DisplayName;
 
+@Timeout(60)
 @DisplayName("Testing invoice checking algorithm")
 public class InvoicesPaymentsSmallTests {
 

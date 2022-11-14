@@ -11,11 +11,15 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * Unit test for simple App.
  */
+@Timeout(60)
+@DisplayName("Tests for partitioning")
 public class ShapeArrayTests 
 {
     private Shapes shapes = null;

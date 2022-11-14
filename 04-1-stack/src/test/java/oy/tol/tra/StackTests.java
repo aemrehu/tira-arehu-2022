@@ -13,6 +13,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import org.junit.jupiter.api.Order;
@@ -30,6 +31,7 @@ import org.junit.jupiter.api.DisplayName;
  * DO NOT change anything here, just implement the StackInterface, instantiate it in
  * StackBuilder.createIntegerStack and perform the tests.
  */
+@Timeout(60)
 @DisplayName("Basic tests for the StackImplementation class.")
 @TestMethodOrder(OrderAnnotation.class)
  public class StackTests 
@@ -73,7 +75,7 @@ import org.junit.jupiter.api.DisplayName;
     @DisplayName("Test filling the stack and emptying it using push and pop.")
     void pushPopStackTest() {
         // Create a random count to fill the stack to.
-        int elementCount = randomizer.nextInt(stackSize);
+        int elementCount = randomizer.nextInt(stackSize) + 10;
         // Fill the list with test data.
         List<Integer> testData = fillWithTestData(elementCount);
         // Push the test data to the stack, asserting that push succeeded.

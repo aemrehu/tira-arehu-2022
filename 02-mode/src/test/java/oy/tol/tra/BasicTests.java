@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import oy.tol.tra.Algorithms.ModeSearchResult;
 
+@Timeout(5)
 @DisplayName("Basic tests for the Mode class.")
 public class BasicTests {
     static final int MIN_ARRAY_SIZE = 500;

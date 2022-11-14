@@ -14,10 +14,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+@Timeout(1440)
 @TestMethodOrder(OrderAnnotation.class)
-@DisplayName("Tests using different Book implementations")
+@DisplayName("Tests using different Book files growing in size")
 public class PerformanceTests {
     
     private static final String outputFileName = "compare.csv";

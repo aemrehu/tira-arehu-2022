@@ -12,6 +12,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,6 +29,7 @@ import org.junit.jupiter.api.Order;
  * DO NOT change anything here, just implement the QueueInterface, instantiate it in
  * QueueBuilder.createIntegerQueue and perform the tests.
  */
+@Timeout(20)
 @DisplayName("Basic tests for the QueueImplementation class.")
 @TestMethodOrder(OrderAnnotation.class)
  public class QueueTests 
@@ -113,7 +115,7 @@ import org.junit.jupiter.api.Order;
         QueueInterface<Integer> queueToTest = QueueFactory.createIntegerQueue(queueSize);
         assertTrue(queueToTest.isEmpty(), () -> "The queue should be empty.");
         // Create a random count to fill the queue to.
-        int elementCount = randomizer.nextInt(queueSize);
+        int elementCount = randomizer.nextInt(queueSize) + 5;
         // Fill the list with test data.
         List<Integer> testData = fillWithTestData(elementCount);
         // Push the test data to the queue, asserting that add succeeded.
