@@ -31,7 +31,7 @@ public class Grades {
        5. Transform the algorithm to a generic one as instructed in the readme file.
       */
       int i = 0;
-      while (i <= grades.length/2) {
+      while (i <= (grades.length/2)-1) {
          int temp = grades[i];
          grades[i] = grades[grades.length-i-1];
          grades[grades.length-i-1] = temp;
@@ -50,16 +50,17 @@ public class Grades {
        4. Fix the issue.
        5. Transform the algorithm to a generic one as instructed in the readme file.
       */
-      int i = grades.length-1;
-      while (i > 0) {
-         if (grades[i] < grades[i-1]) {
-            int tmp = grades[i];
-            grades[i] = grades[i-1];
-            grades[i-1] = tmp;
+      for (int j = grades.length; j > 0; j--) {
+         int i = grades.length-1;
+         while (i > 0) {
+            if (grades[i] < grades[i-1]) {
+               int tmp = grades[i];
+               grades[i] = grades[i-1];
+               grades[i-1] = tmp;
+            }
+            i--;
          }
-         i--;
       }
-
    }
 
 
