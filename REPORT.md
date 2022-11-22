@@ -10,7 +10,11 @@ Jos tehtävässä pyydetään **raportoimaan** jotain, kirjoita myös nämä rap
 
 ## 02-mode
 
-Tähän tehtävään liittyy raportti! Lue ohjeet!
+![withstrings](withstrings.png)
+
+![withdoubles](withdoubles.png)
+
+Koska sort()-metodissa käydään taulukko läpi sisäkkäisissä silmukoissa, on sen aikakompleksisuus O(n^2). findMode()-metodin aikakompleksisuus on ilman sort():a O(n), koska siinä on vain yksi silmukka, missä käydään listan alkiot läpi. Lopullinen aikakompleksisuus findMode():lle on O(n^2). 
 
 ## 03-draw
 

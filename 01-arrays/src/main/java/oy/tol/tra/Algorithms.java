@@ -1,7 +1,5 @@
 package oy.tol.tra;
 
-import javax.lang.model.element.Element;
-
 public class Algorithms {
     
     public static <T extends Comparable<T>> void sort(T [] array) {
