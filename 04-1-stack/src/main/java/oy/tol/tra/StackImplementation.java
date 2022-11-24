@@ -1,5 +1,10 @@
 package oy.tol.tra;
 
+import java.rmi.server.ObjID;
+import java.security.MessageDigest;
+
+import javax.print.attribute.standard.Media;
+
 /**
  * An implementation of the StackInterface.
  * <p>
@@ -17,6 +22,11 @@ public class StackImplementation<E> implements StackInterface<E> {
    // Do not use constant values in code, e.g. 10. Instead, define a constant for that. For example:
    // private static final int MY_CONSTANT_VARIABLE = 10;
 
+   private Object [] itemArray;
+   private int arrayCapacity;
+   private int currentIndex;
+
+   private static final int DEFAULT_CAPACITY = 10;
 
    /**
     * Allocates a stack with a default capacity.
@@ -24,6 +34,13 @@ public class StackImplementation<E> implements StackInterface<E> {
     */
    public StackImplementation() throws StackAllocationException {
       // TODO: call the constructor with size parameter with default size (see member variable!).
+      try {
+         arrayCapacity = DEFAULT_CAPACITY;
+         currentIndex = -1;
+         itemArray = new Object[arrayCapacity];
+      } catch (Exception e) {
+         throw new StackAllocationException(e.getMessage());
+      }
    }
 
    /** TODO: Implement so that
@@ -34,53 +51,98 @@ public class StackImplementation<E> implements StackInterface<E> {
     * @throws StackAllocationException If cannot allocate room for the internal array.
     */
    public StackImplementation(int capacity) throws StackAllocationException {
+      if (capacity < 2) {
+         throw new StackAllocationException("Stack size should be greater than 1.");
+      }
+      try {
+         arrayCapacity = capacity;
+         currentIndex = -1;
+         itemArray = new Object[arrayCapacity];
+      } catch (Exception e) {
+         throw new StackAllocationException(e.getMessage());
+      }
    }
 
-   @Override
+   //@Override
    public int capacity() {
-      // TODO: Implement this
-      return 0;
+      return arrayCapacity;
    }
 
-   @Override
+   //@Override
    public void push(E element) throws StackAllocationException, NullPointerException {
-      // TODO: Implement this
+      if (element == null) {
+         throw new NullPointerException();
+      }
+      if (currentIndex == arrayCapacity - 1) {
+         arrayCapacity *= 2; //double the stack size
+         final Object [] newArray = new Object[arrayCapacity]; //new stack object
+         for (int i=0; i<currentIndex+1; i++) {
+            newArray[i] = itemArray[i]; //transfer elements to new stack
+         }
+         itemArray = newArray; //oldstack is newstack
+      }
+      currentIndex++;
+      itemArray[currentIndex] = element;
    }
 
    @SuppressWarnings("unchecked")
-   @Override
+   //@Override
    public E pop() throws StackIsEmptyException {
-      // TODO: Implement this
-      return null;
+      if (currentIndex == -1) {
+         throw new StackIsEmptyException("Stack is empty.");
+      } else {
+         currentIndex--;
+         return (E) itemArray[currentIndex+1];
+      }
    }
 
    @SuppressWarnings("unchecked")
-   @Override
+   //@Override
    public E peek() throws StackIsEmptyException {
-      // TODO: Implement this
-      return null;
+      if (currentIndex == -1) {
+         throw new StackIsEmptyException("Stack is empty.");
+      } else {
+         return (E) itemArray[currentIndex];
+      }
    }
 
-   @Override
+   //@Override
    public int size() {
-      // TODO: Implement this
-      return 0;
+      return currentIndex + 1;
    }
 
-   @Override
+   //@Override
    public void clear() {
-      // TODO: Implement this
+      final Object [] newArray = new Object[arrayCapacity];
+      itemArray = newArray;
+      currentIndex = -1;
    }
 
-   @Override
+   //@Override
    public boolean isEmpty() {
-      // TODO: Implement this
-      return false;
+      if (currentIndex == -1) {
+         return true;
+      } else {
+         return false;
+      }
    }
 
-   @Override
+   //@Override
    public String toString() {
-      // TODO: Implement this
-      return "";
+      
+      if (isEmpty()) {
+         return "[]";
+      }
+      String stack = "[";
+      for (int i=0; i<currentIndex+1; i++) {
+         if (i==0) {
+            stack = stack + itemArray[i];
+         } else if (i == currentIndex) {
+            stack = stack + ", " + itemArray[i] + "]";
+         } else {
+            stack = stack + ", " + itemArray[i];
+         }
+      }
+      return stack;
    }
 }
