@@ -13,7 +13,6 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import org.junit.jupiter.api.Order;
@@ -31,11 +30,9 @@ import org.junit.jupiter.api.DisplayName;
  * DO NOT change anything here, just implement the StackInterface, instantiate it in
  * StackBuilder.createIntegerStack and perform the tests.
  */
-@Timeout(60)
 @DisplayName("Basic tests for the StackImplementation class.")
 @TestMethodOrder(OrderAnnotation.class)
- public class StackTests 
-{
+public class StackTests {
     static StackInterface<Integer> stackToTest = null;
     static int stackSize = 10;
     static Random randomizer = null;
@@ -52,8 +49,10 @@ import org.junit.jupiter.api.DisplayName;
         randomizer = new Random();
         stackSize = randomizer.nextInt(MAX_STACK_SIZE) + 10;
         stackToTest = StackFactory.createIntegerStack(stackSize);
-        assertNotNull(stackToTest, () -> "Could not create stack object to test. Implement StackBuilder.createIntegerStack().");
-        assertEquals(stackSize, stackToTest.capacity(), () -> "Stack capacity must be the same as provided in construction");
+        assertNotNull(stackToTest,
+                () -> "Could not create stack object to test. Implement StackBuilder.createIntegerStack().");
+        assertEquals(stackSize, stackToTest.capacity(),
+                () -> "Stack capacity must be the same as provided in construction");
         assertTrue(stackToTest.isEmpty(), () -> "Stack should be empty after creating it.");
         assertEquals("[]", stackToTest.toString(), () -> "Test data and stack as string must match");
     }
@@ -65,9 +64,12 @@ import org.junit.jupiter.api.DisplayName;
         // Test that count of just initialized stack is zero and pop returns null.
         assertEquals(0, stackToTest.size(), () -> "Expected stack to be empty, count() returning 0.");
         assertTrue(stackToTest.isEmpty(), () -> "Stack should be empty after creating it.");
-        assertThrows(StackIsEmptyException.class, () -> stackToTest.pop(), "Expecting to get StackIsEmptyException when popping from empty stack.");
-        assertThrows(StackIsEmptyException.class, () -> stackToTest.peek(), "Expecting to get StackIsEmptyException when peeking from empty stack");
-        assertThrows(NullPointerException.class, () -> stackToTest.push(null), () -> "Must get NullPointerException when trying to push null to stack.");
+        assertThrows(StackIsEmptyException.class, () -> stackToTest.pop(),
+                "Expecting to get StackIsEmptyException when popping from empty stack.");
+        assertThrows(StackIsEmptyException.class, () -> stackToTest.peek(),
+                "Expecting to get StackIsEmptyException when peeking from empty stack");
+        assertThrows(NullPointerException.class, () -> stackToTest.push(null),
+                () -> "Must get NullPointerException when trying to push null to stack.");
     }
 
     @Test
@@ -85,19 +87,23 @@ import org.junit.jupiter.api.DisplayName;
         assertFalse(stackToTest.isEmpty(), () -> "Stack should not be empty here.");
         // Check that the stack has the correct element of items.
         assertEquals(elementCount, stackToTest.size(), () -> "Stack must have the number of elements pushed into it.");
-        // Pop elements from the stack and compare that the values are in the same order than in the test data list, reversed.
+        // Pop elements from the stack and compare that the values are in the same order
+        // than in the test data list, reversed.
         int counter = testData.size() - 1;
-        
+
         while (stackToTest.size() > 0) {
-            assertDoesNotThrow( () -> numberFromStack = stackToTest.pop(), "Pop should not throw in this test, but it did.");
+            assertDoesNotThrow(() -> numberFromStack = stackToTest.pop(),
+                    "Pop should not throw in this test, but it did.");
             assertNotNull(numberFromStack, () -> "Item popped from stack should not be null.");
-            assertEquals(testData.get(counter), numberFromStack, () -> "Items popped must be in the order they were pushed into stack.");
+            assertEquals(testData.get(counter), numberFromStack,
+                    () -> "Items popped must be in the order they were pushed into stack.");
             counter--;
         }
         // And since popping all out, test now that the stack is really empty.
         assertEquals(0, stackToTest.size(), () -> "After popping all items, stack must be empty.");
         assertTrue(stackToTest.isEmpty(), () -> "Stack should be empty after popping all out.");
-        assertThrows(StackIsEmptyException.class, () -> stackToTest.pop(), "Pop must throw StackIsEmptyException if stack is empty.");
+        assertThrows(StackIsEmptyException.class, () -> stackToTest.pop(),
+                "Pop must throw StackIsEmptyException if stack is empty.");
         assertEquals("[]", stackToTest.toString(), () -> "Test data and stack as string must match");
     }
 
@@ -109,19 +115,21 @@ import org.junit.jupiter.api.DisplayName;
         stackToTest.clear();
         assertTrue(stackToTest.isEmpty(), () -> "Stack should be empty after clearing it.");
         // Fill the stack to contain max number of items.
-        List<Integer> testData = fillWithTestData(stackSize);
+        int oldCapacity = stackToTest.capacity();
+        List<Integer> testData = fillWithTestData(oldCapacity);
         for (Integer value : testData) {
             assertDoesNotThrow(() -> stackToTest.push(value), "In this test push must succeed, but push failed.");
         }
         assertFalse(stackToTest.isEmpty(), () -> "Stack should not be empty here.");
-        // Stack should be now full so the next push must reallocate internal array and capacity should be increased.
-        int oldCapacity = stackToTest.capacity();
-        assertDoesNotThrow( () -> stackToTest.push(42), "Pushing to a full stack must not fail.");
+        // Stack should be now full so the next push must reallocate internal array and
+        // capacity should be increased.
+        assertDoesNotThrow(() -> stackToTest.push(42), "Pushing to a full stack must not fail.");
         int newCapacity = stackToTest.capacity();
         assertTrue(newCapacity > oldCapacity, () -> "The capacity did not grow when it should have.");
         assertEquals(42, stackToTest.pop(), () -> "Last thing pushed was not popped from stack.");
         assertEquals(testData.toString(), stackToTest.toString(), () -> "Test data and stack as string must match");
-        assertEquals(testData.get(testData.size()-1), stackToTest.pop(), () -> "Reallocated stack has no second to last element in place.");
+        assertEquals(testData.get(testData.size() - 1), stackToTest.pop(),
+                () -> "Reallocated stack has no second to last element in place.");
     }
 
     @Test
@@ -137,7 +145,8 @@ import org.junit.jupiter.api.DisplayName;
         assertFalse(stackToTest.isEmpty(), () -> "Stack should not be empty here.");
         stackToTest.clear();
         assertTrue(stackToTest.isEmpty(), () -> "Stack should be empty after creating it.");
-        assertThrows(StackIsEmptyException.class, () -> stackToTest.pop(), "Pop must throw StackIsEmptyException if stack is empty.");
+        assertThrows(StackIsEmptyException.class, () -> stackToTest.pop(),
+                "Pop must throw StackIsEmptyException if stack is empty.");
         assertEquals(0, stackToTest.size(), () -> "After resetting a stack, count must return zero.");
         assertEquals("[]", stackToTest.toString(), () -> "Test data and stack as string must match");
     }
@@ -155,7 +164,8 @@ import org.junit.jupiter.api.DisplayName;
         assertEquals("[109, 111]", stackToTest.toString(), () -> "Test data and stack as string must match");
         stackToTest.clear();
         assertTrue(stackToTest.isEmpty(), () -> "Stack should be empty after creating it.");
-        assertThrows(StackIsEmptyException.class, () -> stackToTest.peek(), "Peek must throw StackIsEmptyException if stack is empty.");
+        assertThrows(StackIsEmptyException.class, () -> stackToTest.peek(),
+                "Peek must throw StackIsEmptyException if stack is empty.");
     }
 
     @Test
@@ -170,15 +180,18 @@ import org.junit.jupiter.api.DisplayName;
         for (Integer value : testData) {
             assertDoesNotThrow(() -> stackToTest.push(value), "In this test push must succeed, but push failed.");
         }
-        // Stack should be now full so the next push must reallocate internal array and capacity should be increased.
+        // Stack should be now full so the next push must reallocate internal array and
+        // capacity should be increased.
         int newCapacity = stackToTest.capacity();
         testData = fillWithTestData(newCapacity * 10);
         for (Integer value : testData) {
             assertDoesNotThrow(() -> stackToTest.push(value), "In this test push must succeed, but push failed.");
         }
         assertFalse(stackToTest.isEmpty(), () -> "Stack should not be empty here.");
-        assertEquals(firstFillCount + testData.size(), stackToTest.size(), () -> "Stack does not hold enought elements after growing it ten times the original.");
-        assertEquals(testData.get(testData.size()-1), stackToTest.pop(), () -> "Last thing pushed was not popped from stack.");
+        assertEquals(firstFillCount + testData.size(), stackToTest.size(),
+                () -> "Stack does not hold enought elements after growing it ten times the original.");
+        assertEquals(testData.get(testData.size() - 1), stackToTest.pop(),
+                () -> "Last thing pushed was not popped from stack.");
     }
 
     @Test
@@ -191,27 +204,31 @@ import org.junit.jupiter.api.DisplayName;
         int currentSize = stackToTest.size();
         // Now calculate how much to add so that capacity is not increased.
         final int testDataSize = currentCapacity - currentSize - 2;
-        // Then add test data so that the capacity is not changed.
-        List<Integer> testData = fillWithTestData(testDataSize);
-        for (Integer value : testData) {
-            assertDoesNotThrow(() -> stackToTest.push(value), "In this test push must succeed, but push failed.");
+        if (testDataSize > 0) {
+            // Then add test data so that the capacity is not changed.
+            List<Integer> testData = fillWithTestData(testDataSize);
+            for (Integer value : testData) {
+                assertDoesNotThrow(() -> stackToTest.push(value), "In this test push must succeed, but push failed.");
+            }
+            // Then check that size increased correctly...
+            assertEquals(currentSize + testDataSize, stackToTest.size(),
+                    () -> "Increased size must be the same as expected");
+            // ...and that capacity didn't increase.
+            assertEquals(currentCapacity, stackToTest.capacity(), () -> "Capacity should not increase here");
+            assertNotEquals(stackToTest.size(), stackToTest.capacity(), () -> "Capacity must not be the same as size");
         }
-        // Then check that size increased correctly...
-        assertEquals(currentSize + testDataSize, stackToTest.size(), () -> "Increased size must be the same as expected");
-        // ...and that capacity didn't increase.
-        assertEquals(currentCapacity, stackToTest.capacity(), () -> "Capacity should not increase here");
-        assertNotEquals(stackToTest.size(), stackToTest.capacity(), () -> "Capacity must not be the same as size");
     }
 
     /**
      * Utility method to create a list with random test data.
+     * 
      * @param itemCount Number of items to put into the testa data list.
      * @return A list of test data to use with the test stack.
      */
     private List<Integer> fillWithTestData(int itemCount) {
         List<Integer> testData = new ArrayList<Integer>();
         for (int count = 0; count < itemCount; count++) {
-            testData.add(randomizer.nextInt(Integer.MAX_VALUE-1));
+            testData.add(randomizer.nextInt(Integer.MAX_VALUE - 1));
         }
         return testData;
     }
