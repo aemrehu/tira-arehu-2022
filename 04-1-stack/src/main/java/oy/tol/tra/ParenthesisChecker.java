@@ -61,6 +61,34 @@ public class ParenthesisChecker {
       //         throw an exception, wrong kind of parenthesis were in the text (e.g. "asfa ( asdf } sadf")
       // if the stack is not empty after all the characters have been handled
       //   throw an exception since the string has more opening than closing parentheses.
-      return 0; // << TODO: Change that too!!
+      Character test;
+      Character popped;
+      int count = 0;
+      for (int i = 0; i < fromString.length(); i++) {
+         test = fromString.charAt(i);
+         if (test == '(' || test == '[' || test == '{') {
+            stack.push(test);
+            count += 1;
+         } else if (test == ')' || test == ']' || test == '}') {
+            count += 1;
+            try {
+               popped = stack.pop();
+            } catch (final StackIsEmptyException e) {
+               throw new ParenthesesException("Too many closing parentheses.", -1);
+            }
+            if (test == ')' && (popped == '{' || popped == '[')) {
+               throw new ParenthesesException("Mismatched parentheses.", -3);
+            } else if (test == ']' && (popped == '{' || popped == '(')) {
+               throw new ParenthesesException("Mismatched parentheses.", -3);
+            } else if (test == '}' && (popped == '(' || popped == '[')) {
+               throw new ParenthesesException("Mismatched parentheses.", -3);
+            }
+         }
+      }
+      if (stack.isEmpty() == false) {
+         throw new ParenthesesException("Too many opening parentheses.", -2);
+      }
+
+      return count;
    }
 }
