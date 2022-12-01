@@ -22,7 +22,7 @@ public class StackFactory {
    public static StackInterface<Integer> createIntegerStack(int capacity) {
       // - Instantiates your stack implementation, 
       // - and return the stack object to the caller.
-      return new StackImplementation<>(capacity);
+      return new StackImplementation<Integer>(capacity);
    }
 
    /**
@@ -33,6 +33,6 @@ public class StackFactory {
     */
    public static StackInterface<Character> createCharacterStack(int capacity) {
       // TODO: Implement this!
-      return new StackImplementation<>(capacity);
+      return new StackImplementation<Character>(capacity);
    }
 }

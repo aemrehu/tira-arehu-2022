@@ -20,7 +20,11 @@ public class QueueFactory {
       // - Instantiates your queue implementation using Integer as template parameter, 
       //   with the given capacity,
       // - and return the object to the caller.
-      return null;
+      return new QueueImplementation<Integer>(capacity);
+   }
+
+   public static QueueInterface<String> createStringQueue(int capacity) {
+      return new QueueImplementation<String>(capacity);
    }
 
 }
