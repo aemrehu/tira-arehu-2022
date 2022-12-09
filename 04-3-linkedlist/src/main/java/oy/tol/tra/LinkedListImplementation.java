@@ -1,5 +1,8 @@
 package oy.tol.tra;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    private class Node<T> {
@@ -18,61 +21,201 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
    private Node<E> head = null;
    private int size = 0;
 
-   @Override
+   //@Override
    public void add(E element) throws NullPointerException, LinkedListAllocationException {
-      // TODO: Implement this.
+      if (element == null) {
+         throw new NullPointerException("Element cannot be null");
+      }
+      Node<E> newnode = new Node<E>(element);
+      if (head == null) {
+         head = newnode;
+         size++;
+      } else if (head != null) {
+         newnode.element = element;
+         Node<E> currentnode = head;
+         while (currentnode.next != null) {
+            currentnode = currentnode.next;
+         }
+         currentnode.next = newnode;
+         size++;
+      } else {
+         throw new LinkedListAllocationException("Failed to allocate new list element.");
+      }
    }
 
-   @Override
+   //@Override
    public void add(int index, E element) throws NullPointerException, LinkedListAllocationException, IndexOutOfBoundsException {
-      // TODO: Implement this.
+      if (index < 0 || (index >= size && index != 0)) {
+         throw new IndexOutOfBoundsException("Index out of bounds");
+      } else if (element == null) {
+         throw new NullPointerException("Element cannot be null");
+      }
+      Node<E> newnode = new Node<E>(element);
+      if (index == 0) {
+         newnode.next = head;
+         head = newnode;
+         size++;
+      } else if (head != null) {
+         int counter = 0;
+         Node<E> current = head;
+         Node<E> previous = null;
+         while (current != null && counter != index) {
+            previous = current;
+            current = current.next;
+            counter++;
+         }
+         newnode.next = current;
+         previous.next = newnode;
+         size++;
+      } else {
+         throw new LinkedListAllocationException("Failed to allocate new list element.");
+      }
    }
 
-   @Override
+   //@Override
    public boolean remove(E element) throws NullPointerException {
-      // TODO: Implement this.
+      if (element == null) {
+         throw new NullPointerException("Element cannot be null");
+      } else if (head == null) {
+         return false;
+      } else if (head.element == element) {
+         head = head.next;
+         size--;
+         return true;
+      }
+      Node<E> current = head;
+      Node<E> previous = null;
+      while (current.next != null) {
+         if (current.element != element) {
+            previous = current;
+            current = current.next;
+            continue;
+         } else {
+            previous.next = current.next;
+            size--;
+            return true;
+         }
+      }
       return false;
    }
 
-   @Override
+   //@Override
    public E remove(int index) throws IndexOutOfBoundsException {
-      // TODO: Implement this.
-      return null;
+      if (index < 0 || index >= size) {
+         throw new IndexOutOfBoundsException("Index out of bounds");
+      } else if (head != null) {
+         int counter = 0;
+         Node<E> current = head;
+         Node<E> previous = null;
+         while (current != null && counter != index) {
+            previous = current;
+            current = current.next;
+            counter++;
+         }
+         if (previous == null) {
+            head = current.next;
+            size--;
+         } else {
+            previous.next = current.next;
+            size--;
+         }
+         return current.element;
+      } else {
+         return null;
+      }
    }
 
-   @Override
+   //@Override
    public E get(int index) throws IndexOutOfBoundsException {
-      // TODO: Implement this.
-      return null;
+      if (index < 0 || index >= size) {
+         throw new IndexOutOfBoundsException("Index out of bounds");
+      } else if (head == null) {
+         return null;
+      } else {
+         int counter = 0;
+         Node<E> current = head;
+         while (current.next != null && counter != index) {
+            current = current.next;
+            counter++;
+         }
+         return current.element;
+      }
    }
 
-   @Override
+   //@Override
    public int indexOf(E element) throws NullPointerException {
-      // TODO: Implement this.
-      return -1;
+      if (element == null) {
+         throw new NullPointerException("Element cannot be null");
+      } else if (head == null) {
+         return -1;
+      }
+      int counter = 0;
+      if (head.element == element) {
+         return counter;
+      }
+      Node<E> current = head;
+      while (current.next != null) {
+         if (current.element != element) {
+            current = current.next;
+            counter++;
+            continue;
+         } else {
+         return counter;
+         }
+      }
+      if (current.element == element) {
+         return counter;
+      } else {
+         return -1;
+      }
    }
 
-   @Override
+   //@Override
    public int size() {
-      // TODO: Implement this.
-      return -1;
+      return size;
    }
 
-   @Override
+   //@Override
    public void clear() {
-      // TODO: Implement this.
+      size = 0;
+      head = null;
    }
 
-   @Override
+   //@Override
    public void reverse() {
-      // TODO: implement this only when doing the task explained the TASK-2.md.
-      // This method is not needed in doing the task in the README.md.
+      if (head == null) {
+         ;
+      } else {
+         Node<E> current = head;
+         Node<E> previous = null;
+         Node<E> tmp = null;
+         for (int i=0; i < size; i++) {
+            if (current.next == null) {
+               current.next = previous;
+               head = current;
+               break;
+            } else {
+               tmp = current.next;
+               current.next = previous;
+               previous = current;
+               current = tmp;
+            }
+         }
+      }
    }
 
-   @Override
+   //@Override
    public String toString() {
-      // TODO: Implement this.
-      return "";
+      if (size == 0) {
+         return "[]";
+      }
+      Node<E> current = head;
+      String result = "[";
+      while (current.next != null) {
+         result = result + current.toString() + ", ";
+         current = current.next;
+      }
+      result = result + current.toString() + "]";
+      return result;
    }
-   
 }
