@@ -78,7 +78,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
          throw new NullPointerException("Element cannot be null");
       } else if (head == null) {
          return false;
-      } else if (head.element == element) {
+      } else if (element.equals(head.element)) {
          head = head.next;
          size--;
          return true;
@@ -86,7 +86,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       Node<E> current = head;
       Node<E> previous = null;
       while (current.next != null) {
-         if (current.element != element) {
+         if (!element.equals(current.element)) {
             previous = current;
             current = current.next;
             continue;
@@ -150,12 +150,12 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
          return -1;
       }
       int counter = 0;
-      if (head.element == element) {
+      if (element.equals(head.element)) {
          return counter;
       }
       Node<E> current = head;
       while (current.next != null) {
-         if (current.element != element) {
+         if (!element.equals(current.element)) {
             current = current.next;
             counter++;
             continue;
@@ -163,7 +163,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
          return counter;
          }
       }
-      if (current.element == element) {
+      if (element.equals(current.element)) {
          return counter;
       } else {
          return -1;
