@@ -152,11 +152,60 @@ public class Algorithms {
     }
 
     /**
-     * Mergesort
+     * Fast sorting algorithm: Heapsort
      * @param <T>
      * @param array
      */
-    public static <T extends Comparable<T>> void fastSort(Comparable<T>[] array) {
+    public static <T extends Comparable<T>> void fastSort(T [] array) {
+        int length = array.length;
+        heapify(array, length);
+        int end = length-1;
+        while (end > 0) {
+            swap(array, 0, end);
+            end--;
+            siftDown(array, 0, end);
+        }
+    }
 
+    private static <T extends Comparable<T>> void heapify(T [] array, int length) {
+        int start = parent(length-1);
+        while (start >= 0) {
+            siftDown(array, start, length-1);
+            start--;
+        }
+    }
+
+    private static <T extends Comparable<T>> void siftDown(T [] array, int start, int end) {
+        int root = start;
+        while (leftChild(root) <= end) {
+            int child = leftChild(root);
+            int swap = root;
+            if (array[swap].compareTo(array[child]) < 0) {
+                swap = child;
+            }
+            if (child+1 <= end && array[swap].compareTo(array[child+1]) < 0) {
+                swap = child+1;
+            }
+            if (swap == root) {
+                break;
+            } else {
+                swap(array, swap, root);
+                root = swap;
+            }
+        }
+    }
+
+    private static int parent(int i) {
+        //int parent = (int) Math.floor((i-1)/2);
+        //System.out.println(parent);
+        return (int) Math.floor((i-1)/2);
+    }
+
+    private static int leftChild(int i) {
+        return 2 * i + 1;
+    }
+
+    private static int rightChild(int i) {
+        return 2 * i + 2;
     }
 }
