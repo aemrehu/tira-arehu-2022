@@ -196,13 +196,11 @@ public class Algorithms {
     }
 
     private static int parent(int i) {
-        //int parent = (int) Math.floor((i-1)/2);
-        //System.out.println(parent);
         return (int) Math.floor((i-1)/2);
     }
 
     private static int leftChild(int i) {
         return 2 * i + 1;
     }
-    
+
 }

@@ -150,7 +150,20 @@ public class InvoiceInspector {
       //      tocolect.add(invoice)
       //   if (invoicesum > paymentsum)
       //      tocolect.add(invoice-payment)
-      //   
+      
+      Algorithms.fastSort(invoices);
+      Algorithms.fastSort(payments);
+      for (int counter=0; counter < invoices.length; counter++) {
+         Invoice invoice = invoices[counter];
+         Payment pToSearch = new Payment(invoice.number, 0);
+         int paymentIndex = Algorithms.binarySearch(pToSearch, payments, 0, payments.length-1);
+         if (paymentIndex == -1) {
+            toCollect.add(invoice);
+            continue;
+         } else if (invoice.sum.compareTo(payments[paymentIndex].sum) > 0) {
+            toCollect.add(new Invoice(invoice.number, invoice.sum-payments[paymentIndex].sum, dueDateValue));
+         }
+      }
    }
 
 }
