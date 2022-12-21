@@ -21,7 +21,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
    private Node<E> head = null;
    private int size = 0;
 
-   //@Override
+   @Override
    public void add(E element) throws NullPointerException, LinkedListAllocationException {
       if (element == null) {
          throw new NullPointerException("Element cannot be null");
@@ -43,7 +43,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       }
    }
 
-   //@Override
+   @Override
    public void add(int index, E element) throws NullPointerException, LinkedListAllocationException, IndexOutOfBoundsException {
       if (index < 0 || (index >= size && index != 0)) {
          throw new IndexOutOfBoundsException("Index out of bounds");
@@ -72,7 +72,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       }
    }
 
-   //@Override
+   @Override
    public boolean remove(E element) throws NullPointerException {
       if (element == null) {
          throw new NullPointerException("Element cannot be null");
@@ -99,7 +99,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       return false;
    }
 
-   //@Override
+   @Override
    public E remove(int index) throws IndexOutOfBoundsException {
       if (index < 0 || index >= size) {
          throw new IndexOutOfBoundsException("Index out of bounds");
@@ -125,7 +125,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       }
    }
 
-   //@Override
+   @Override
    public E get(int index) throws IndexOutOfBoundsException {
       if (index < 0 || index >= size) {
          throw new IndexOutOfBoundsException("Index out of bounds");
@@ -142,7 +142,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       }
    }
 
-   //@Override
+   @Override
    public int indexOf(E element) throws NullPointerException {
       if (element == null) {
          throw new NullPointerException("Element cannot be null");
@@ -170,18 +170,18 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       }
    }
 
-   //@Override
+   @Override
    public int size() {
       return size;
    }
 
-   //@Override
+   @Override
    public void clear() {
       size = 0;
       head = null;
    }
 
-   //@Override
+   @Override
    public void reverse() {
       if (head == null) {
          ;
@@ -204,7 +204,7 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       }
    }
 
-   //@Override
+   @Override
    public String toString() {
       if (size == 0) {
          return "[]";

@@ -139,7 +139,7 @@ public class Algorithms {
      */
     public static <T extends Comparable<T>> int binarySearch(T aValue, T [] fromArray, int fromIndex, int toIndex) {
         while (fromIndex <= toIndex) {
-            int middle = (fromIndex + toIndex) / 2;
+            int middle = fromIndex + (toIndex - fromIndex) / 2;
             if (aValue.compareTo(fromArray[middle]) < 0) {
                toIndex = middle - 1;
             } else if (aValue.compareTo(fromArray[middle]) > 0) {
@@ -149,5 +149,14 @@ public class Algorithms {
             }
          }
          return -1;
+    }
+
+    /**
+     * Mergesort
+     * @param <T>
+     * @param array
+     */
+    public static <T extends Comparable<T>> void fastSort(Comparable<T>[] array) {
+
     }
 }

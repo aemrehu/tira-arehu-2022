@@ -48,12 +48,12 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         }
     }
 
-    //@Override
+    @Override
     public int capacity() {
         return capacity;
     }
 
-    //@Override
+    @Override
     public void enqueue(E element) throws QueueAllocationException, NullPointerException {
         if (element == null) {
             throw new NullPointerException();
@@ -85,9 +85,9 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         tail++;
     }
 
-    //@Override
+    @Override
     public E dequeue() throws QueueIsEmptyException {
-        if (isEmpty() == true) {
+        if (isEmpty()) {
             throw new QueueIsEmptyException("Not implemented yet.");
         }
         int index = head;
@@ -99,21 +99,21 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         return (E) itemArray[index];
     }
 
-    //@Override
+    @Override
     public E element() throws QueueIsEmptyException {
-        if (isEmpty() == true) {
+        if (isEmpty()) {
             throw new QueueIsEmptyException("The queue is empty.");
         } else {
             return (E) itemArray[head];
         }
     }
 
-    //@Override
+    @Override
     public int size() {
         return count;
     }
 
-    //@Override
+    @Override
     public boolean isEmpty() {
         if ( count == 0) {
             return true;
@@ -122,7 +122,7 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         }
     }
 
-    //@Override
+    @Override
     public void clear() {
         final Object [] newArray = new Object[capacity];
         itemArray = newArray;
@@ -131,9 +131,9 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         count = 0;
     }
 
-    //@Override
+    @Override
     public String toString() {
-        if (isEmpty() == true) {
+        if (isEmpty()) {
             return "[]";
         }
         int x = head;

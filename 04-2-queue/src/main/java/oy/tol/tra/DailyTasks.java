@@ -42,7 +42,7 @@ public class DailyTasks {
          // 4.1 in the timer task run:
             public void run() {
                // 4.1.1 check if there are tasks in the queue:
-               if (dailyTaskQueue.isEmpty() != true) {
+               if (!dailyTaskQueue.isEmpty()) {
                   // 4.1.2 if yes, print the task from the queue, dequeueing it.
                   String task = dailyTaskQueue.dequeue();
                   System.out.println(task);
