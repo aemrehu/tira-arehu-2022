@@ -204,8 +204,5 @@ public class Algorithms {
     private static int leftChild(int i) {
         return 2 * i + 1;
     }
-
-    private static int rightChild(int i) {
-        return 2 * i + 2;
-    }
+    
 }
