@@ -22,4 +22,20 @@ public class Person {
     }
 
     // TODO: Implement equals(), hashCode() and Comparable interface.
+
+    public boolean equals(Object person) {
+        if (person instanceof Person) {
+            return this.getFullName().equals(((Person)person).getFullName());
+        } else {
+            return false;
+        }
+    }
+
+    public int compareTo(Person person) {
+        return this.getFullName().compareTo(person.getFullName());
+    }
+
+    public int hashCode() {
+        return this.getFullName().hashCode();
+    }
 }
