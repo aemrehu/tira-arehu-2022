@@ -39,12 +39,12 @@ public class Person implements Comparable<Person> {
 
     @Override
     public int hashCode() {
-        int hash = 7517;
-        int prime = 4639;
+        int hash = 5381;
+        int x = 33;
         String name = getFullName();
         int length = name.length();
         for (int i=0; i<length; i++) {
-            hash = ((prime * hash)) + name.charAt(i);
+            hash = (x * hash) + name.charAt(i);
         }
         return hash;
     }
