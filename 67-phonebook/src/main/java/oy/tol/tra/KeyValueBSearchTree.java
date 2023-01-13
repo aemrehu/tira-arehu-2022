@@ -1,19 +1,31 @@
 package oy.tol.tra;
 
-
 public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionary<K, V> {
 
     // This is the BST implementation, KeyValueHashTable has the hash table implementation
 
+    private TreeNode<K,V> root;
+    private int count;
+
+    //Statistics
+    int maxDepth;
+    int maxCollisions;
+
+    public KeyValueBSearchTree() {
+        root = null;
+        count = 0;
+        maxDepth = 0;
+        maxCollisions = 0;
+    }
+
     @Override
     public Type getType() {
-       return Type.NONE;
+       return Type.BST;
     }
  
     @Override
     public int size() {
-        // TODO: Implement this!
-        return 0;
+        return count;
     }
 
     /**
@@ -28,36 +40,78 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
      */
     @Override
     public String getStatus() {
-        // TODO: Implement this!
-        return "";
+        String toReturn = "";
+        toReturn += "Count          : " + count;
+        toReturn += "\nMax depth      : " + maxDepth;
+        toReturn += "\nMax collisions : " + maxCollisions;
+
+        return toReturn;
     }
 
     @Override
     public boolean add(K key, V value) throws IllegalArgumentException, OutOfMemoryError {
-        // TODO: Implement this!
-        return false;
+        if (key == null || value == null) {
+            throw new IllegalArgumentException();
+        } else {
+            if (root == null) {
+                root = new TreeNode<K,V>(key, value);
+                count++;
+                maxDepth = 1;
+                maxCollisions = 0;
+                return true;
+            } else {
+                TreeNode.addDepth = 1;
+                TreeNode.collisions = 0;
+                int added = root.insert(key, value, key.hashCode());
+                if (added > 0) {
+                    count++;
+                    if (TreeNode.addDepth > maxDepth) {
+                        maxDepth = TreeNode.addDepth;
+                    }
+                    if (TreeNode.collisions > maxCollisions) {
+                        maxCollisions = TreeNode.collisions;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     @Override
     public V find(K key) throws IllegalArgumentException {
-        // TODO: Implement this!
-        return null;
+        if (key == null) {
+            throw new IllegalArgumentException();
+        } else {
+            if (root == null) {
+                return null;
+            } else {
+                return root.find(key, key.hashCode());
+            }
+        }
     }
 
     @Override
     public void ensureCapacity(int size) throws OutOfMemoryError {
-        // TODO: Implement this (if needed)!
+        // not needed
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Pair<K,V> [] toSortedArray() {
-        // TODO: Implement this!
-        return null;
-      }
-    
-      @Override
-      public void compress() throws OutOfMemoryError {
-        // TODO: Implement this (if needed)!
+        if (root == null) {
+            return null;
+        }
+        Pair<K,V> [] returnArray = (Pair<K,V>[])new Pair[count];
+        int [] toAddIndex = {0};
+        root.toSortedArray(returnArray, toAddIndex);
+        Algorithms.fastSort(returnArray);
+        return returnArray;
     }
-   
+    
+    @Override
+    public void compress() throws OutOfMemoryError {
+        // not needed
+    }
+
 }

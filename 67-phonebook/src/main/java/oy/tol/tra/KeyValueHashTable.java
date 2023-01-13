@@ -56,12 +56,12 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
     @Override
     public String getStatus() {
         String toReturn = "";
-        toReturn += "Capacity     : " + capacity;
-        toReturn += "\nCount        : " + count;
-        toReturn += "\nFilled       : " + (double)((double)count/(double)capacity)*100.0 + "%";
-        toReturn += "\nCollisions   : " + collisionCount;
-        toReturn += "\nMax Probing  : " + maxProbingCount;
-        toReturn += "\nReallocations: " + reallocationCount;
+        toReturn += "Capacity      : " + capacity;
+        toReturn += "\nCount         : " + count;
+        toReturn += "\nFilled        : " + (double)((double)count/(double)capacity)*100.0 + "%";
+        toReturn += "\nCollisions    : " + collisionCount;
+        toReturn += "\nMax Probing   : " + maxProbingCount;
+        toReturn += "\nReallocations : " + reallocationCount;
         return toReturn;
     }
 
