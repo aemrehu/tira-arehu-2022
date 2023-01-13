@@ -55,13 +55,13 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
      */
     @Override
     public String getStatus() {
-        String toReturn = "";
-        toReturn += "Capacity      : " + capacity;
-        toReturn += "\nCount         : " + count;
-        toReturn += "\nFilled        : " + (double)((double)count/(double)capacity)*100.0 + "%";
-        toReturn += "\nCollisions    : " + collisionCount;
-        toReturn += "\nMax Probing   : " + maxProbingCount;
-        toReturn += "\nReallocations : " + reallocationCount;
+        String toReturn = "Hashtable statistics:";
+        toReturn += "\n Capacity       : " + capacity;
+        toReturn += "\n Count          : " + count;
+        toReturn += "\n Filled         : " + (double)((double)count/(double)capacity)*100.0 + "%";
+        toReturn += "\n Collisions     : " + collisionCount;
+        toReturn += "\n Max Probing    : " + maxProbingCount;
+        toReturn += "\n Reallocations  : " + reallocationCount;
         return toReturn;
     }
 

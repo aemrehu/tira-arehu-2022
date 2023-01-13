@@ -40,10 +40,10 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
      */
     @Override
     public String getStatus() {
-        String toReturn = "";
-        toReturn += "Count          : " + count;
-        toReturn += "\nMax depth      : " + maxDepth;
-        toReturn += "\nMax collisions : " + maxCollisions;
+        String toReturn = "BST statistics:";
+        toReturn += "\n Count          : " + count;
+        toReturn += "\n Max depth      : " + maxDepth;
+        toReturn += "\n Max collisions : " + maxCollisions;
 
         return toReturn;
     }
