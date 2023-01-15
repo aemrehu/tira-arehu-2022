@@ -1,10 +1,5 @@
 package oy.tol.tra;
 
-import java.rmi.server.ObjID;
-import java.security.MessageDigest;
-
-import javax.print.attribute.standard.Media;
-
 /**
  * An implementation of the StackInterface.
  * <p>

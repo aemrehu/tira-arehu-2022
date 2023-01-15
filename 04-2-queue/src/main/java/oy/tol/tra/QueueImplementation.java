@@ -1,7 +1,5 @@
 package oy.tol.tra;
 
-import javax.swing.DefaultBoundedRangeModel;
-
 public class QueueImplementation<E> implements QueueInterface<E> {
     
     private Object [] itemArray;
@@ -85,6 +83,7 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         tail++;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E dequeue() throws QueueIsEmptyException {
         if (isEmpty()) {
@@ -99,6 +98,7 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         return (E) itemArray[index];
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E element() throws QueueIsEmptyException {
         if (isEmpty()) {

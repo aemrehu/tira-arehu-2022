@@ -1,8 +1,5 @@
 package oy.tol.tra;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    private class Node<T> {
